@@ -40,7 +40,7 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 
 /* LoraWAN application configuration (Mw is configured by lorawan_conf.h) */
-#define ACTIVE_REGION                               LORAMAC_REGION_EU868
+#define ACTIVE_REGION                               LORAMAC_REGION_US915
 
 /*!
  * CAYENNE_LPP is myDevices Application server.

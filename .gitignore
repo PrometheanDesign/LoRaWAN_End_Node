@@ -1,6 +1,7 @@
 # Ignores for STM32Cube IDE project
 .DS_Store
 ._*
+.mxproject
 STM32CubeIDE/Debug
 STM32CubeIDE/Release
 STM32CubeIDE/.settings
