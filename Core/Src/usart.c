@@ -122,10 +122,12 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
       Error_Handler();
     }
 
+#if defined(DMA_CCR_SECM) && defined(DMA_CCR_PRIV) /* Only works on dual core device */
     if (HAL_DMA_ConfigChannelAttributes(&hdma_usart2_tx, DMA_CHANNEL_NPRIV) != HAL_OK)
     {
       Error_Handler();
     }
+#endif
 
     __HAL_LINKDMA(uartHandle,hdmatx,hdma_usart2_tx);
 

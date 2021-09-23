@@ -11,6 +11,16 @@
   *                  calls main()).
   *            After Reset the Cortex-M4 processor is in Thread mode,
   *            priority is Privileged, and the Stack is set to Main.
+  *
+  *            Modified to work with STM32WLE5xx if defined(STM32WLE5xx)
+  *
+  *            If BOOT0 pin is high, device will boot with system ROM at
+  *            0x1FFF0000 mapped to 0x00000000 (unless the nSWBOOT0 Option
+  *            bit is 0.) We want the user Flash at 0x08000000 mapped to
+  *            0x00000000 (so interrupt vector map works.) When the bootloader
+  *            in system ROM transfers control here, if REMAP_FLASH_USER is
+  *            defined, we remap memory so the user Flash is active.
+  *            See https://www.st.com/content/ccc/resource/technical/document/reference_manual/group0/75/9e/fa/fc/d6/80/4f/a9/DM00530369/files/DM00530369.pdf/jcr:content/translations/en.DM00530369.pdf#page=58
   ******************************************************************************
   * @attention
   *
@@ -59,6 +69,30 @@ defined in linker script */
 Reset_Handler:
   ldr   r0, =_estack
   mov   sp, r0          /* set stack pointer */
+
+#define REMAP_FLASH_USER
+/**
+ * Set memory map to main (user) FLASH :SYSCFG->MEMRMP = 0
+ * Bits 2:0 MEM_MODE[2:0]: memory mapping selection
+ * These bits control the memory internal mapping at address 0x0000 0000. These bits are
+ * used to select the physical remap by software and so, bypass the BOOT mode setting.
+ * After reset, these bits take the value selected by BOOT0 (pin or option bit depending on
+ * nSWBOOT0 option bit) and BOOT1 option bit.
+ *     000: Main Flash memory mapped at CPU 0x00000000
+ *     001: System Flash memory mapped at CPU 0x00000000
+ *     010: Reserved
+ *     011: SRAM1 mapped at CPU 0x00000000
+ *     100: Reserved
+ *     101: Reserved
+ *     110: Reserved
+ *     111: Reserved
+*/
+#ifdef REMAP_FLASH_USER
+  ldr     r3, =0x40010000   /* SYSCFG MEMRMP (Memory Remap) register address */
+  movs    r2, #0            /* Main Flash memory mapped at CPU 0x00000000 */
+  str     r2, [r3, #0]      /* Write MEMRMP register */
+  dsb                       /* Data Synchronization Barrier - force memory sync */
+#endif
 
 /* Call the clock system initialization function.*/
   bl  SystemInit
@@ -304,8 +338,12 @@ g_pfnVectors:
 	.weak	DAC_IRQHandler
 	.thumb_set DAC_IRQHandler,Default_Handler
 
+#ifdef STM32WLE5xx
+	.set C2SEV_PWR_C2H_IRQHandler,0
+#else
 	.weak	C2SEV_PWR_C2H_IRQHandler
-	.thumb_set C2SEV_PWR_C2H_IRQHandler,Default_Handler
+	.thumb_set C2SEV_PWR_C2H_IRQHandler,Default_Handler+30
+#endif
 
 	.weak	COMP_IRQHandler
 	.thumb_set COMP_IRQHandler,Default_Handler
@@ -379,11 +417,16 @@ g_pfnVectors:
 	.weak	SUBGHZSPI_IRQHandler
 	.thumb_set SUBGHZSPI_IRQHandler,Default_Handler
 
+#ifdef STM32WLE5xx
+	.set IPCC_C1_RX_IRQHandler,0
+	.set IPCC_C1_TX_IRQHandler,0
+#else
 	.weak	IPCC_C1_RX_IRQHandler
 	.thumb_set IPCC_C1_RX_IRQHandler,Default_Handler
 
 	.weak	IPCC_C1_TX_IRQHandler
 	.thumb_set IPCC_C1_TX_IRQHandler,Default_Handler
+#endif
 
 	.weak	HSEM_IRQHandler
 	.thumb_set HSEM_IRQHandler,Default_Handler

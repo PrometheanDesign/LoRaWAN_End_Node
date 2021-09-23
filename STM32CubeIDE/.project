@@ -428,6 +428,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/usart_if.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/RAK3172/rak3172_radio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/RAK3172/rak3172_radio.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/SEEED_LoRa_E5/seeed_lora_e5_radio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/SEEED_LoRa_E5/seeed_lora_e5_radio.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/STM32WLxx_Nucleo/stm32wlxx_nucleo.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/STM32WLxx_Nucleo/stm32wlxx_nucleo.c</locationURI>

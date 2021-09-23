@@ -80,7 +80,8 @@ typedef enum
 /** @defgroup STM32WLXX_NUCLEO_RADIO_LOW_LEVEL_RFSWITCH RADIO LOW LEVEL RF SWITCH Constants
   * @{
   */ 
-  
+#ifndef RF_SW_CTRL1_PIN // If called from another radio BSP, this will already be defined
+
 #define RF_SW_CTRL3_PIN                          GPIO_PIN_3
 #define RF_SW_CTRL3_GPIO_PORT                    GPIOC
 #define RF_SW_CTRL3_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOC_CLK_ENABLE()
@@ -100,6 +101,8 @@ typedef enum
 #define RF_TCXO_VCC_GPIO_PORT                    GPIOB
 #define RF_TCXO_VCC_CLK_ENABLE()                 __HAL_RCC_GPIOB_CLK_ENABLE()
 #define RF_TCXO_VCC_CLK_DISABLE()                __HAL_RCC_GPIOB_CLK_DISABLE()
+
+#endif // not defined RF_SW_CTRL1_PIN
 /**
  * @}
  */

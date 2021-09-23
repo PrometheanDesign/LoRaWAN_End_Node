@@ -43,7 +43,7 @@
   * @brief  Init Radio Switch 
   * @retval BSP status
   */
-int32_t BSP_RADIO_Init(void)
+__attribute__((weak)) int32_t BSP_RADIO_Init(void)
 {
   GPIO_InitTypeDef  gpio_init_structure = {0};
   
@@ -75,7 +75,7 @@ int32_t BSP_RADIO_Init(void)
   * @brief  DeInit Radio Switch
   * @retval BSP status
   */
-int32_t BSP_RADIO_DeInit(void)
+__attribute__((weak)) int32_t BSP_RADIO_DeInit(void)
 {
   RF_SW_CTRL3_GPIO_CLK_ENABLE();
 
@@ -102,7 +102,7 @@ int32_t BSP_RADIO_DeInit(void)
   *           @arg RADIO_SWITCH_RFO_HP
   * @retval BSP status
   */
-int32_t BSP_RADIO_ConfigRFSwitch(BSP_RADIO_Switch_TypeDef Config)
+__attribute__((weak)) int32_t BSP_RADIO_ConfigRFSwitch(BSP_RADIO_Switch_TypeDef Config)
 {
   switch (Config)
   {
@@ -152,7 +152,7 @@ int32_t BSP_RADIO_ConfigRFSwitch(BSP_RADIO_Switch_TypeDef Config)
   *  RADIO_CONF_RFO_LP
   *  RADIO_CONF_RFO_HP
   */
-int32_t BSP_RADIO_GetTxConfig(void)
+__attribute__((weak)) int32_t BSP_RADIO_GetTxConfig(void)
 {
   return RADIO_CONF_RFO_LP_HP;
 }
@@ -164,7 +164,7 @@ int32_t BSP_RADIO_GetTxConfig(void)
   *  RADIO_CONF_TCXO_NOT_SUPPORTED
   *  RADIO_CONF_TCXO_SUPPORTED
   */
-int32_t BSP_RADIO_IsTCXO(void)
+__attribute__((weak)) int32_t BSP_RADIO_IsTCXO(void)
 {
   return RADIO_CONF_TCXO_SUPPORTED;
 }
@@ -176,7 +176,7 @@ int32_t BSP_RADIO_IsTCXO(void)
   *  RADIO_CONF_DCDC_NOT_SUPPORTED
   *  RADIO_CONF_DCDC_SUPPORTED  
   */
-int32_t BSP_RADIO_IsDCDC(void)
+__attribute__((weak)) int32_t BSP_RADIO_IsDCDC(void)
 {
   return RADIO_CONF_DCDC_SUPPORTED;
 }

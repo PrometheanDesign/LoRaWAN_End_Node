@@ -24,16 +24,29 @@
 
 @par Description
 
+This application is derived from the single-core LoRaWAN_End_Node application
+included in Version 1.1.0 of  the STM32Cube MCU Package for STM32WL series at
+https://www.st.com/en/embedded-software/stm32cubewl.html.
+
 This directory contains a set of source files that implements a LoRa application
 device sending sensors data to LoRa Network server.
 Data are sent periodically on timer event or on "user button 1" depending on the configuration.
 
-This application is targeting the STM32WLxx Nucleo board embedding the STM32WLxx.
+The original ST LoRaWAN_End_Node application is targeting the STM32WLxx Nucleo
+board embedding the STM32WL55xx.
+
+This derivative adapts that application for use on the STM32WLE5CC-based RAK3172
+module (default) or STM32WLE5JC-based SEEED Studio LoRa E5 module.
+
+Note that none of the peripheral devices (I2C devices, etc) have been modified for the
+RAK3172 or SEEED LoRa E5 configuration, even though these devices do not necessarily
+exist outside the context of the STM32WLxx Nucleo board. This is for clarity to emphasize
+only the changes needed to make the LoRa radio portion of the application work.
   ******************************************************************************
 
 @par Keywords
 
-Applications, SubGHz_Phy, LoRaWAN, End_Node, SingleCore
+Applications, SubGHz_Phy, LoRaWAN, End_Node, SingleCore, STM32WLE5xx, RAK3172, SEEED_LoRa_E5
 
 @par Directory contents
 
@@ -111,7 +124,7 @@ Applications, SubGHz_Phy, LoRaWAN, End_Node, SingleCore
 
 @par Hardware and Software environment
 
-  - This example runs on the STM32WLxx Nucleo board.
+  - This example runs on the STM32WLxx Nucleo board, RAK 3172, or SEEED LoRa E5.
 
   - STM32WLxx Nucleo board Set-up
     - Connect the Nucleo board to your PC with a USB cable type A to micro-B
@@ -122,6 +135,18 @@ Applications, SubGHz_Phy, LoRaWAN, End_Node, SingleCore
     - sys_conf.h, radio_conf.h, lorawan_conf.h, lora_app.c, lora_app.h, Commissioning.h, se-identity.h, mw_log_conf.h, main.h, etc
     - Careful:
         - the region and class chosen on LoRaWAN/App/lora_app.h shall be compatible with LoRaWAN/Target/lorawan_conf.h list
+
+  - For STM32WLxx Nucleo board, ensure that Project Properties->C/C++ General->Paths and Symbols->#Symbols
+    has the following values defined:
+    - CORE_CM4, STM32WL55xx, USE_HAL_DRIVER, DEBUG (optional)
+
+  - For RAK 3172 board, ensure that Project Properties->C/C++ General->Paths and Symbols->#Symbols
+    has the following values defined:
+    - CORE_CM4, STM32WLE5xx, RAK3172, USE_HAL_DRIVER, DEBUG (optional)
+
+  - For SEEED LoRa E5 board, ensure that Project Properties->C/C++ General->Paths and Symbols->#Symbols
+    has the following values defined:
+    - CORE_CM4, STM32WLE5xx, SEEED_LORA_E5, USE_HAL_DRIVER, DEBUG (optional)
 
   -Set Up:
 
