@@ -24,6 +24,9 @@
  extern "C" {
 #endif
 
+/* Includes ------------------------------------------------------------------*/
+#include "stm32wlxx_bsp_radio.h"
+
 #define RF_SW_CTRL1_PIN                          GPIO_PIN_8
 #define RF_SW_CTRL1_GPIO_PORT                    GPIOB
 #define RF_SW_CTRL1_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOB_CLK_ENABLE()
@@ -38,8 +41,6 @@
 #define RF_TCXO_VCC_GPIO_PORT                    GPIOB
 #define RF_TCXO_VCC_CLK_ENABLE()                 __HAL_RCC_GPIOB_CLK_ENABLE()
 #define RF_TCXO_VCC_CLK_DISABLE()                __HAL_RCC_GPIOB_CLK_DISABLE()
-
-#include "stm32wlxx_nucleo_radio.h"
 
 #ifdef __cplusplus
 }

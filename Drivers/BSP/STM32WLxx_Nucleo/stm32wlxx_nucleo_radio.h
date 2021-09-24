@@ -25,8 +25,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32wlxx_nucleo_errno.h"
-#include "stm32wlxx_nucleo_conf.h"
+#include "stm32wlxx_bsp_radio.h"
 
    
 /** @addtogroup BSP
@@ -41,46 +40,9 @@
   * @{
   */
 
-/** @defgroup STM32WLXX_NUCLEO_RADIO_LOW_LEVEL_Exported_Types RADIO LOW LEVEL Exported Types
-  * @{
-  */
-
-typedef enum 
-{
-  RADIO_SWITCH_OFF    = 0,
-  RADIO_SWITCH_RX     = 1,
-  RADIO_SWITCH_RFO_LP = 2,
-  RADIO_SWITCH_RFO_HP = 3,
-}BSP_RADIO_Switch_TypeDef;
-
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32WLXX_NUCLEO_RADIO_LOW_LEVEL_Exported_Constants RADIO LOW LEVEL Exported Constants
-  * @{
-  */
-
-/** @defgroup STM32WLXX_NUCLEO_RADIO_LOW_LEVEL_RADIOCONFIG RADIO LOW LEVEL RADIO CONFIG Constants
-  * @{
-  */ 
-#define RADIO_CONF_RFO_LP_HP                     0U
-#define RADIO_CONF_RFO_LP                        1U
-#define RADIO_CONF_RFO_HP                        2U
-
-#define RADIO_CONF_TCXO_NOT_SUPPORTED            0U
-#define RADIO_CONF_TCXO_SUPPORTED                1U
-
-#define RADIO_CONF_DCDC_NOT_SUPPORTED            0U
-#define RADIO_CONF_DCDC_SUPPORTED                1U
-/**
-  * @}
-  */ 
-
 /** @defgroup STM32WLXX_NUCLEO_RADIO_LOW_LEVEL_RFSWITCH RADIO LOW LEVEL RF SWITCH Constants
   * @{
   */ 
-#ifndef RF_SW_CTRL1_PIN // If called from another radio BSP, this will already be defined
 
 #define RF_SW_CTRL3_PIN                          GPIO_PIN_3
 #define RF_SW_CTRL3_GPIO_PORT                    GPIOC
@@ -102,28 +64,9 @@ typedef enum
 #define RF_TCXO_VCC_CLK_ENABLE()                 __HAL_RCC_GPIOB_CLK_ENABLE()
 #define RF_TCXO_VCC_CLK_DISABLE()                __HAL_RCC_GPIOB_CLK_DISABLE()
 
-#endif // not defined RF_SW_CTRL1_PIN
 /**
  * @}
  */
-
-/**
-  * @}
-  */
-
-/** @defgroup STM32WLXX_NUCLEO_RADIO_LOW_LEVEL_Exported_Functions RADIO LOW LEVEL Exported Functions
-  * @{
-  */
-int32_t BSP_RADIO_Init(void);
-int32_t BSP_RADIO_DeInit(void);
-int32_t BSP_RADIO_ConfigRFSwitch(BSP_RADIO_Switch_TypeDef Config);
-int32_t BSP_RADIO_GetTxConfig(void);
-int32_t BSP_RADIO_IsTCXO(void);
-int32_t BSP_RADIO_IsDCDC(void);
-
-/**
-  * @}
-  */
 
 /**
   * @}

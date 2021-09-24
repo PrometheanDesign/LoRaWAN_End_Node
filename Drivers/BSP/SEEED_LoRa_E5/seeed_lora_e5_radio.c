@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    rak3172_radio.c
+  * @file    seeed_lora_e5_radio.c
   * @author  MCD Application Team
   * @brief   This file provides set of firmware functions to manage:
-  *          - RF circuitry available on RAK Wireless RAK3172 module (STM32WLE5CC)
+  *          - RF circuitry available on SEEED Studios LoRa-E5 module (STM32WLE5JC)
   ******************************************************************************
   * @attention
   *
@@ -23,7 +23,7 @@
 #include "seeed_lora_e5_radio.h"
 
 #ifndef STM32WLE5xx
-#error RAK3172 uses STM32WLE5CC, not STM32WL55xx.  Must #define STM32WLE5xx
+#error SEEED_LoRa_E5 uses STM32WLE5JC, not STM32WL55xx.  Must #define STM32WLE5xx
 #endif
 /**
   * @brief  Init Radio Switch

@@ -44,7 +44,7 @@ extern "C" {
 /* In order to use BSP, users can add the BSP files in the IDE project space */
 /* and define USE_BSP_DRIVER in the preprocessor definitions  */
 #include "stm32wlxx_nucleo.h"
-#include "stm32wlxx_nucleo_radio.h"
+#include "stm32wlxx_bsp_radio.h"
 #endif /* defined(USE_BSP_DRIVER) */
 
 /* USER CODE BEGIN include */
