@@ -317,21 +317,6 @@ static void tiny_snprintf_like(char *buf, uint32_t maxsize, const char *strForma
 /**
   * @note This function overwrites the __weak one from HAL
   */
-HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
-{
-  /*Don't enable SysTick if TIMER_IF is based on other counters (e.g. RTC) */
-  /* USER CODE BEGIN HAL_InitTick_1 */
-
-  /* USER CODE END HAL_InitTick_1 */
-  return HAL_OK;
-  /* USER CODE BEGIN HAL_InitTick_2 */
-
-  /* USER CODE END HAL_InitTick_2 */
-}
-
-/**
-  * @note This function overwrites the __weak one from HAL
-  */
 uint32_t HAL_GetTick(void)
 {
   /* TIMER_IF can be based on other counter the SysTick e.g. RTC */
